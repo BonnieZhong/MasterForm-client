@@ -1,0 +1,23 @@
+.box {
+  text-align: center;
+  margin-top: 5rem;
+  border-top: 10px solid  rgb(0 152 119);
+  width: 80%;
+}
+.text {
+  font-size: 80px;
+  font-family: sans-serif;
+  color: rgb(0 152 119);
+}
+.paragraph-text {
+  font-size: 30px;
+  font-family: sans-serif;
+  color: grey;
+  margin-block-start: -1.5rem;
+  font-weight: 100;
+}
+.image {
+  margin-top: 30px;
+  height: 200px;
+  width: 200px;
+}

@@ -1,0 +1,14 @@
+.box-margin {
+  padding-right: 10px;
+}
+.label-text {
+  font-family: sans-serif, Arial, Helvetica;
+  font-size: 20px;
+}
+.container-box {
+  border: 1px solid red;
+  padding: 2rem 1rem;
+}
+p::after {
+  content: "*";
+}
