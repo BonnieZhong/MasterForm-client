@@ -11,6 +11,45 @@ const App = (props) => {
   const [singleLineQuestions, setSingleLineQuestions] = useState([]);
   const [multilineQuestions, setMultilineQuestions] = useState([]);
   const [selectQuestions, setSelectQuestions] = useState([]);
+  const [clientInfo, setClientInfo] = useState({
+    firstName: "", lastName: "", phone: "", email: ""
+  });
+  const [response, setResponse] = useState();
+  const [clientResponses, setClientResponses] = useState([]);
+  
+  // Get client data from a child component - BasicInfoComponent
+  const set = name => {
+    return ({target: { value }}) => {
+      setClientInfo(oldValues => ({...oldValues, [name]: value}));
+    }
+  };
+
+  useEffect(() => {
+    if(response !== undefined && response) {
+      if(clientResponses.length === 0) {
+        // Add the first new response
+        let clientResponsesCopy = [...clientResponses, response];
+        setClientResponses(clientResponsesCopy);
+      } else {
+        // Process subsequence responses
+        let duplicated = false;
+        let clientResponsesCopy = [...clientResponses];
+        clientResponsesCopy.forEach(item => {
+          if(item.question === response.question) {
+            // Update a response
+            item.response = response.response;
+            duplicated = true;
+          }
+        })
+        // Add a new response
+        if(!duplicated) {
+          clientResponsesCopy.push(response);
+          setClientResponses(clientResponsesCopy);
+        }
+      }
+    }
+  }, [response]);
+  
 
   useEffect(() => {
     console.log("FETCH DATA");
@@ -27,6 +66,7 @@ const App = (props) => {
       )
   }, []);
 
+  // TODO: combine single line and multiline into one array
   useEffect(() => {
     if (allQuestions !== undefined && allQuestions.length > 0) {
       let singleLineArr = [];
@@ -47,13 +87,13 @@ const App = (props) => {
       setMultilineQuestions(multilineArr);
     }
   }, [allQuestions]);
-
   // console.log(singleLineQuestions, multilineQuestions, selectQuestions);
+  
 
   return (
     <>
       <HeaderComponent />
-      <ThankYouPage />
+      {/* <ThankYouPage /> */}
       <Grid
         container
         direction="column"
@@ -61,22 +101,35 @@ const App = (props) => {
         alignItems="center"
       >
         <Grid item width="80%">
-          <BasicInfoComponent />
+          <BasicInfoComponent clientInfo={clientInfo} set={set} />
         </Grid>
+
         <Grid item width="80%">
           {singleLineQuestions.length > 0 ? (
             singleLineQuestions.map((item, index) => (
-              <TextFieldComponent key={index} question={item.question} multiline={item.multiline}/>
+              <TextFieldComponent 
+                key={index} 
+                question={item.question} 
+                multiline={item.multiline} 
+                setResponse={setResponse}
+              />
             ))
             ) : (null)}
         </Grid>
+
         <Grid item width="80%">
           {multilineQuestions.length > 0 ? (
             multilineQuestions.map((item, index) => (
-              <TextFieldComponent key={index} question={item.question} multiline={item.multiline}/>
+              <TextFieldComponent 
+                key={index} 
+                question={item.question} 
+                multiline={item.multiline}
+                setResponse={setResponse}
+              />
             ))
             ) : (null)}
         </Grid>
+
         <Grid item width="80%">
           {selectQuestions.length > 0 ? (
             selectQuestions.map((item, index) => (
@@ -84,6 +137,7 @@ const App = (props) => {
             ))
             ) : (null)}
         </Grid>
+
         <Grid item width="80%" style={{ textAlign: "right", marginTop: "1rem"}}>
           <Button variant='contained'>Submit</Button>
         </Grid>

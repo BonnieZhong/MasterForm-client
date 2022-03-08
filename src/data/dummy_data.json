@@ -1,0 +1,44 @@
+[{
+	"userid": 1,
+	"username": "Bonnie",
+	"status": "Active"
+},
+{
+	"userid": 2,
+	"username": "Alice",
+	"status": "Active"
+},
+{
+	"userid": 3,
+	"username": "Fred",
+	"status": "Suspended"
+},
+{
+	"userid": 4,
+	"username": "David",
+	"status": "Disactive"
+}]
+
+
+[
+  {
+  	"type": "single line",
+    "question": "What's your budget?",
+    "multiline": false
+  },
+  {
+  	"type": "multiline",
+    "question": "Anything else you want to tell us?",
+    "multiline": true
+  },
+  {
+  	"type": "select",
+    "question": "Which state do you live in?",
+    "options": ["VIC", "ACT", "SYD", "WA", "TAS", "QLD"]
+  },
+  {
+  	"type": "select",
+    "question": "What kind of property are you looking for?",
+    "options": ["House", "Unit", "Townhouse", "Apartment"]
+  }
+]
