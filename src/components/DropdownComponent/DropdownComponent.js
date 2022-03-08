@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FormControl, Grid, MenuItem, Select } from '@mui/material';
 
-const DropdownComponent = ({ question, options }) => {
+const DropdownComponent = ({ question, options, setResponse }) => {
+  const [value, setValue] = useState("placeholder");
+  const onChange = (event) => {
+    console.log(event.target.value);
+    setValue(event.target.value);
+    const response = {
+      "question": question,
+      "response": event.target.value
+    };
+    // console.log(response);
+    setResponse(response);
+  }
+  
   return (
     <Grid
       container
@@ -14,8 +26,10 @@ const DropdownComponent = ({ question, options }) => {
       <FormControl fullWidth>
         <Select 
           id="singleSelect"
-          value={options[0]}
+          value={value}
+          onChange={onChange}
         > 
+          <MenuItem value="placeholder" disabled><em>Choose an option</em></MenuItem>
           { options.map((option, index) => (
             <MenuItem  key={index} value={option}>{option}</MenuItem>
           ))}
