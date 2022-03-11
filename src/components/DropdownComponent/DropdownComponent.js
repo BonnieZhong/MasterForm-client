@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { FormControl, Grid, MenuItem, Select } from '@mui/material';
 
-const DropdownComponent = ({ question, options, setResponse }) => {
+const DropdownComponent = ({ question, options, setResponse, addQuestion = true }) => {
   const [value, setValue] = useState("placeholder");
   const onChange = (event) => {
     console.log(event.target.value);
     setValue(event.target.value);
-    const response = {
+    const response = addQuestion ? {
       "question": question,
       "response": event.target.value
-    };
+    } : event.target.value;
     // console.log(response);
     setResponse(response);
   }

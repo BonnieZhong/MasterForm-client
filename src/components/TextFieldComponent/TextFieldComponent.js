@@ -2,15 +2,20 @@ import React, { useState } from 'react';
 import { TextField, Grid } from '@mui/material';
 import "./TextFieldComponent.css";
 
-const TextFieldComponent = ({ question, multiline, setResponse }) => {
+const TextFieldComponent = ({ question, multiline, setResponse, index, addQuestion = true }) => {
   const [value, setValue] = useState("");
   // const [response, setResponse] = useState({});
   const onTextChange = (event) => {
     setValue(event.target.value);
-    const response = {
-      "question": question,
-      "response": event.target.value,
-      "multiline": multiline
+    const response = addQuestion ? {
+      question,
+      response: event.target.value,
+      multiline
+    } : {
+      index,
+      question: event.target.value,
+      type: "textfield",
+      multiline: false
     };
     // console.log(response);
     setResponse(response);
