@@ -1,0 +1,40 @@
+.add-title {
+  background-color: #3a4920cc;
+  padding: 2rem 0rem;
+  border-radius: 10px;
+  color: white;
+  width: 100%;
+  text-align: center;
+}
+
+.div-btn {
+  margin-top: 10px;
+  text-align: right;
+}
+
+.add-btn {
+  margin-left: 20px !important;
+}
+
+.experiment-form-title {
+  font-family: sans-serif, Arial, Helvetica;
+  font-size: 20px;
+}
+
+.add-divider {
+  border-width: 1px !important;
+  border-color: #3a4920 !important;
+  margin-top: 3rem !important;
+}
+
+.div-checkbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+}
+
+.checkbox-text {
+  font-family: sans-serif, Arial, Helvetica;
+  font-size: 15px;
+}

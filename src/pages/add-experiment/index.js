@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Button, IconButton, TextField } from '@mui/material';
+import { Button, TextField, Divider } from '@mui/material';
 
-import DropdownComponent from '../components/DropdownComponent/DropdownComponent';
-import TextFieldComponent from '../components/TextFieldComponent/TextFieldComponent';
-import SelectionListQuestion from '../components/SelectionListComponent';
-import forms from '../api/forms';
+import DropdownComponent from '../../components/DropdownComponent';
+import TextFieldComponent from '../../components/TextFieldComponent';
+import SelectionListQuestion from '../../components/SelectionListComponent';
+import forms from '../../api/forms';
+import HeaderComponent from '../../components/HeaderComponent';
+import '../../components/App.css';
+import './index.css';
 
 const AddExperimentPage = () => {
   const [questionType, setQuestionType] = useState('');
@@ -12,17 +15,22 @@ const AddExperimentPage = () => {
   const [newComponents, setNewComponents] = useState([]);
   const [count, setCount] = useState(0);
   const [questions, setQuestions] = useState([]);
- 
+  const [value, setValue] = useState('');
+
+  const onTextChange = (event) => {
+    setValue(event.target.value);
+  }
+
   const addTextField = () => {
     return (
-    <TextFieldComponent 
-      key={count}
-      index={count}
-      question="Please enter your question:" 
-      multiline
-      setResponse={setChangedQuestion}
-      addQuestion={false}
-    />
+        <TextFieldComponent 
+          key={count}
+          index={count}
+          question='Please enter your question:' 
+          multiline
+          setResponse={setChangedQuestion}
+          addQuestion={false}
+        />
     );
   };
 
@@ -32,8 +40,7 @@ const AddExperimentPage = () => {
 
   // Handle adding question UI
   const handleAddQuestion = (event) => {
-    // console.log(questionType);
-    if(questionType === "textfield") {
+    if(questionType === 'textfield') {
       setNewComponents([...newComponents, addTextField()]);
     }else{
       setNewComponents([...newComponents, addSelectField()]);
@@ -52,7 +59,7 @@ const AddExperimentPage = () => {
         }
         return item;
       });
-  
+      console.log(questionArr);
       if (isExisted) {
         setQuestions(questionArr);
       } else {
@@ -60,8 +67,6 @@ const AddExperimentPage = () => {
       }
     }
   }, [changedQuestion])
- 
-  // console.log(questions);
 
   const onSubmit = () => {
     const experiment = [];
@@ -79,7 +84,7 @@ const AddExperimentPage = () => {
     console.log(questions);
     addQuestions.then(async () => {
       const experimentData = {
-        title: "testing",
+        title: value,
         questionIds: experiment
       }
       const res = await forms.post('/experiment', experimentData);
@@ -89,17 +94,34 @@ const AddExperimentPage = () => {
 
   return (
     <>
-    {newComponents.length > 0 ? newComponents.map(item => {
-      return item
-    }) : null} 
-    <DropdownComponent 
-      question="Please select the question type:" 
-      options={["textfield", "select"]}
-      setResponse={setQuestionType}
-      addQuestion={false}
-    />
-    <Button variant='contained' type='button' onClick={handleAddQuestion}>Add</Button>
-    <Button variant='contained' type='submit' onClick={onSubmit}>Submit</Button>
+    <HeaderComponent showBg={true}/>
+    <div className="div-container">
+      <h1 className='add-title'>Create your experiment form</h1>
+      <div>
+        <p className="experiment-form-title">Experiment Form Title:</p>
+        <TextField 
+          id="textField" 
+          variant="outlined" 
+          value={value}
+          onChange={onTextChange}
+          fullWidth 
+        />
+      </div>
+      {newComponents.length > 0 ? newComponents.map(item => {
+        return item
+      }) : null} 
+      <Divider variant="middle" className="add-divider"/>
+      <DropdownComponent 
+        question="Please select the question type:" 
+        options={["textfield", "select"]}
+        setResponse={setQuestionType}
+        addQuestion={false}
+      />
+      <div className="div-btn">
+        <Button variant="contained" color="success" type="button" onClick={handleAddQuestion}>Add Question</Button>
+        <Button variant="contained" color="success" type="submit" onClick={onSubmit} className="add-btn">Submit</Button>
+      </div>
+      </div>
     </>
   );
 };

@@ -1,18 +1,17 @@
 .box {
   text-align: center;
   margin-top: 5rem;
-  border-top: 10px solid  rgb(0 152 119);
-  width: 80%;
+  width: 100%;
 }
 .text {
   font-size: 80px;
   font-family: sans-serif;
-  color: rgb(0 152 119);
+  color: #3a4920;
 }
 .paragraph-text {
   font-size: 30px;
   font-family: sans-serif;
-  color: grey;
+  color: #3a4920;
   margin-block-start: -1.5rem;
   font-weight: 100;
 }

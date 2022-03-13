@@ -10,7 +10,6 @@ const DropdownComponent = ({ question, options, setResponse, addQuestion = true 
       "question": question,
       "response": event.target.value
     } : event.target.value;
-    // console.log(response);
     setResponse(response);
   }
   
@@ -20,9 +19,9 @@ const DropdownComponent = ({ question, options, setResponse, addQuestion = true 
       direction="column"
       justifyContent="center"
       alignItems="flex-start"
-      className='container-box2'
+      className="text-field-container"
     >
-      <p className='label-text'>{question}</p>
+      <p className="label-text">{question}</p>
       <FormControl fullWidth>
         <Select 
           id="singleSelect"

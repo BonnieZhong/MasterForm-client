@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Grid } from '@mui/material';
 
-import HeaderComponent from '../HeaderComponent/HeaderComponent';
-import BasicInfoComponent from '../BasicInfoComponent/BasicInfoComponent';
-import TextFieldComponent from '../TextFieldComponent/TextFieldComponent';
-import DropdownComponent from '../DropdownComponent/DropdownComponent';
-import ThankYouPage from '../../pages/ThankyouPage';
+import HeaderComponent from '../HeaderComponent';
+import BasicInfoComponent from '../BasicInfoComponent';
+import TextFieldComponent from '../TextFieldComponent';
+import DropdownComponent from '../DropdownComponent';
+import ThankYouPage from '../../pages/thankyou';
 import forms from '../../api/forms';
+import '../App.css';
+import './index.css';
 
-const FormComponent = ({ experimentId }) => {
+const FormComponent = ({ experimentId, experimentTitle }) => {
   const [allQuestions, setAllQuestions] = useState([]);
   const [textFieldQuestions, setTextFieldQuestions] = useState([]);
   const [selectQuestions, setSelectQuestions] = useState([]);
   const [clientInfo, setClientInfo] = useState({
-    firstName: "", lastName: "", phone: "", email: ""
+    firstName: '', lastName: '', phone: '', email: ''
   });
   const [response, setResponse] = useState();
   const [clientResponses, setClientResponses] = useState([]);
@@ -26,22 +28,18 @@ const FormComponent = ({ experimentId }) => {
     const getQuestions = async (questionSet) => {
       let queryParams = [];
       questionSet.forEach(item => {
-        let param = "id="+item;
+        let param = 'id='+item;
         queryParams.push(param);
       });
-      const queryStr = queryParams.join("&");
-      console.log(queryStr);
+      const queryStr = queryParams.join('&');
       const response = await forms.get(`/questions/?${queryStr}`);
-      const data = response.data;
       setAllQuestions(response.data);
     };
     // Get a set of question ID for current experiment form
     const getForms = async () => {
       const response = await forms.get(`/experiment/?id=${experimentId}`);
       setDisabled(response.data[0].disabled);
-      console.log(response);
       const questionSet = response.data[0].questionIds;
-      console.log(questionSet);
       getQuestions(questionSet);
     };
     getForms();
@@ -53,7 +51,7 @@ const FormComponent = ({ experimentId }) => {
       let textFieldArr = [];
       let selectArr = [];
       allQuestions.forEach(question => {
-        if (question.type === "textfield") {
+        if (question.type === 'textfield') {
           textFieldArr.push(question);
         } else {
           selectArr.push(question);
@@ -98,15 +96,16 @@ const FormComponent = ({ experimentId }) => {
     }
   }, [response]);
 
-  // Submit data to Server
+  // Submit form data to Server
   const onSubmit = async (event) => {
     event.preventDefault();
     const data = { 
-      "ClientInfo": clientInfo,
-      "QuestionResponses": clientResponses
+      'ClientInfo': clientInfo,
+      'QuestionResponses': clientResponses
     };
     const response = await forms.post('/forms', data);
     console.log(response.data);
+    setIsSuccess(true);
   }
 
   const renderContent = () => {
@@ -114,58 +113,63 @@ const FormComponent = ({ experimentId }) => {
       return <ThankYouPage />;
     } else {
       return (
-        <form onSubmit={onSubmit}>
-            <Grid
-              container
-              direction="column"
-              justifyContent="center"
-              alignItems="center"
-            >
-              {/* Client basic info */}
-              <Grid item width="80%">
-                <BasicInfoComponent clientInfo={clientInfo} set={set} />
+        <div className="div-container">
+          <form onSubmit={onSubmit}>
+              <Grid
+                container
+                direction="column"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <h1 className="form-title">{`${experimentTitle} form`}</h1>
+                {/* Client basic info */}
+                <Grid item width="100%">
+                  <BasicInfoComponent clientInfo={clientInfo} set={set} />
+                </Grid>
+    
+                {/* Text field questions */}
+                <Grid item width="100%">
+                  {textFieldQuestions.length > 0 ? (
+                    textFieldQuestions.map((item, index) => (
+                      <TextFieldComponent 
+                        key={index} 
+                        question={item.question} 
+                        multiline={item.multiline}
+                        setResponse={setResponse}
+                      />
+                    ))
+                    ) : (null)}
+                </Grid>
+                
+                {/* Select field questions */}
+                <Grid item width="100%">
+                  {selectQuestions.length > 0 ? (
+                    selectQuestions.map((item, index) => (
+                      <DropdownComponent 
+                        key={index} 
+                        question={item.question} 
+                        options={item.options}
+                        setResponse={setResponse}
+                      />
+                    ))
+                    ) : (null)}
+                </Grid>
+    
+                <Grid item width="100%" style={{ textAlign: "right", marginTop: "1rem"}}>
+                  <Button variant="contained" type="submit">Submit</Button>
+                </Grid>
               </Grid>
-  
-              {/* Text field questions */}
-              <Grid item width="80%">
-                {textFieldQuestions.length > 0 ? (
-                  textFieldQuestions.map((item, index) => (
-                    <TextFieldComponent 
-                      key={index} 
-                      question={item.question} 
-                      multiline={item.multiline}
-                      setResponse={setResponse}
-                    />
-                  ))
-                  ) : (null)}
-              </Grid>
-              
-              {/* Select field questions */}
-              <Grid item width="80%">
-                {selectQuestions.length > 0 ? (
-                  selectQuestions.map((item, index) => (
-                    <DropdownComponent 
-                      key={index} 
-                      question={item.question} 
-                      options={item.options}
-                      setResponse={setResponse}
-                    />
-                  ))
-                  ) : (null)}
-              </Grid>
-  
-              <Grid item width="80%" style={{ textAlign: "right", marginTop: "1rem"}}>
-                <Button variant='contained' type='submit'>Submit</Button>
-              </Grid>
-            </Grid>
           </form>
+        </div>
       );
     }
   };
 
   const renderPage = () => {
     if (disabled) {
-      return "Not Available";
+      return (<div className='div-container'>
+        <h1 className="loading-text">Sorry, this experiment form is Not Available.</h1>
+      </div>);
     } else {
       return renderContent();
     }
@@ -173,8 +177,10 @@ const FormComponent = ({ experimentId }) => {
 
   return (
     <>
-      <HeaderComponent />
-      {allQuestions.length > 0 ? renderPage() : "Loading..."}
+      <HeaderComponent showBg={true}/>
+      {allQuestions.length > 0 ? renderPage() : (
+        <h1 className="loading-text">Loading you experiments...</h1>
+      )}
     </>
   );
 };

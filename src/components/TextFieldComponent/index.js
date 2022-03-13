@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { TextField, Grid } from '@mui/material';
-import "./TextFieldComponent.css";
+import './index.css';
 
 const TextFieldComponent = ({ question, multiline, setResponse, index, addQuestion = true }) => {
-  const [value, setValue] = useState("");
-  // const [response, setResponse] = useState({});
+  const [value, setValue] = useState('');
   const onTextChange = (event) => {
     setValue(event.target.value);
     const response = addQuestion ? {
@@ -14,10 +13,9 @@ const TextFieldComponent = ({ question, multiline, setResponse, index, addQuesti
     } : {
       index,
       question: event.target.value,
-      type: "textfield",
+      type: 'textfield',
       multiline: false
     };
-    // console.log(response);
     setResponse(response);
   }
 
@@ -28,9 +26,9 @@ const TextFieldComponent = ({ question, multiline, setResponse, index, addQuesti
       direction="column"
       justifyContent="center"
       alignItems="flex-start"
-      className='container-box2'
+      className="text-field-container"
     >
-      <p className='label-text'>{question}</p>
+      <p className="text-field-label">{question}</p>
       { multiline ? (
         <TextField 
           id="textField" 

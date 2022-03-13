@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Button, TextField } from '@mui/material';
 
+import './index.css';
+
 const SelectionListQuestion = ({ index, setQuestion }) => {
   const [options, setOptions] = useState([]);
   const [optionText, setOptionText] = useState('');
@@ -14,7 +16,7 @@ const SelectionListQuestion = ({ index, setQuestion }) => {
   useEffect(() => {
     let question = {
       index,
-      type: "select",
+      type: 'select',
       question: questionText,
       options
     }
@@ -22,15 +24,32 @@ const SelectionListQuestion = ({ index, setQuestion }) => {
   }, [options, questionText]);
 
   return (
-    <div style={{marginLeft: '10px'}}>
-      <h3>Please enter your question:</h3>
-      <TextField variant="outlined" value={questionText} onChange={(e) => setQuestionText(e.target.value)}/>
-      <h3>Please give options to your question:</h3>
-      {options.length > 0 ? options.map((item, i) => {
-        return <div key={i}>{item}</div>;
-      }) : null}
-      <TextField variant="outlined" value={optionText} onChange={(e) => setOptionText(e.target.value)} />
-      <Button variant='contained' type='button' onClick={(e) => handleAddOptions(e)}>Add</Button>
+    <div>
+      <p className="select-text">Please enter your question:</p>
+      <TextField variant="outlined" value={questionText} onChange={(e) => setQuestionText(e.target.value)} fullWidth/>
+      <p className="select-text">Please give options to your question:</p>
+      <div className="div-option-text">
+        {options.length > 0 ? options.map((item, i) => {
+          return <span className="option-text" key={i}>{item}</span>;
+        }) : null}
+      </div>
+      <div className="div-option">
+        <TextField 
+          variant="outlined" 
+          value={optionText} 
+          onChange={(e) => setOptionText(e.target.value)} 
+          className="option-box"
+        />
+        <Button 
+          variant="contained" 
+          type="button" 
+          color="success"
+          onClick={(e) => handleAddOptions(e)}
+          className="select-add-btn"
+        >
+          Add
+        </Button>
+      </div>
     </div>
   );
 };

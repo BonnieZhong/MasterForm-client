@@ -1,0 +1,16 @@
+.card-title {
+  font-family: sans-serif, Arial, Helvetica;
+  font-size: 30px;
+  color: #3a4920;
+}
+.description {
+  font-family: sans-serif, Arial, Helvetica;
+  font-size: 18px;
+  color: #3a4920;
+  font-weight: 300;
+}
+
+.card-btn {
+  color: white !important;
+  background-color: #3a4920cc !important;
+}

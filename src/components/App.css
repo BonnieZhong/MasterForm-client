@@ -1,0 +1,8 @@
+.div-container {
+  background-color: beige;
+  margin: 1rem;
+  padding: 1rem 3rem;
+  height: 100%;
+  border-radius: 10px;
+  min-height: 800px;
+}

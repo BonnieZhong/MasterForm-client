@@ -1,0 +1,14 @@
+.experiment-title {
+  background-color: #3a4920cc;
+  padding: 2rem 0rem;
+  border-radius: 10px;
+  color: white;
+  width: 100%;
+  text-align: center;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
