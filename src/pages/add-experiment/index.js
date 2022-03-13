@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, TextField, Divider } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 import DropdownComponent from '../../components/DropdownComponent';
 import TextFieldComponent from '../../components/TextFieldComponent';
@@ -9,13 +10,14 @@ import HeaderComponent from '../../components/HeaderComponent';
 import '../../components/App.css';
 import './index.css';
 
-const AddExperimentPage = () => {
+const AddExperimentPage = ({ setRefetchData }) => {
   const [questionType, setQuestionType] = useState('');
   const [changedQuestion, setChangedQuestion] = useState({});
   const [newComponents, setNewComponents] = useState([]);
   const [count, setCount] = useState(0);
   const [questions, setQuestions] = useState([]);
   const [value, setValue] = useState('');
+  const navigate = useNavigate();
 
   const onTextChange = (event) => {
     setValue(event.target.value);
@@ -59,7 +61,7 @@ const AddExperimentPage = () => {
         }
         return item;
       });
-      console.log(questionArr);
+      // console.log(questionArr);
       if (isExisted) {
         setQuestions(questionArr);
       } else {
@@ -74,21 +76,23 @@ const AddExperimentPage = () => {
       questions.forEach(async (item, index, array) => {
         delete item.index;
         const res = await forms.post('/questions', item);
-        console.log(res.data.id);
+        // console.log(res.data.id);
         experiment.push(res.data.id);
         if (index === array.length - 1) {
           resolve();
         }
       });
     });
-    console.log(questions);
+    // console.log(questions);
     addQuestions.then(async () => {
       const experimentData = {
         title: value,
         questionIds: experiment
       }
       const res = await forms.post('/experiment', experimentData);
-      console.log(res.data);
+      // console.log(res.data);
+      setRefetchData(true);
+      navigate('/experiments');
     });
   };
 

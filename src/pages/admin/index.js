@@ -14,14 +14,14 @@ import HeaderComponent from '../../components/HeaderComponent';
 import './index.css';
 import '../../components/App.css'
 
-const AdminPage = ({ allExperiments }) => {
+const AdminPage = ({ allExperiments, setRefetchData }) => {
   const [experiments, setExperiments] = useState([]);
 
   // Dynamic render table cells
   const renderTableCells = () => {
     if(experiments.length > 0){
       return experiments.map(item => (
-        <ExperimentRow key={item.id} experiment={item}/>
+        <ExperimentRow setRefetchData={setRefetchData} key={item.id} experiment={item}/>
       ));
     }
   };

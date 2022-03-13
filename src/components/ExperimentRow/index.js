@@ -7,7 +7,7 @@ import {
 
 import forms from '../../api/forms';
 
-const ExperimentRow = ({ experiment }) => {
+const ExperimentRow = ({ experiment, setRefetchData }) => {
   const [checked, setChecked] = useState(!experiment.disabled);
 
   // Update the experiment status in DB and UI
@@ -16,6 +16,7 @@ const ExperimentRow = ({ experiment }) => {
     forms.patch(`/experiment/${experiment.id}`, {
       disabled : checked
     });
+    setRefetchData(true);
   };
 
   return (

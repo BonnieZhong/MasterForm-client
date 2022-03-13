@@ -8,7 +8,7 @@ import './Card.css';
 const CardComponent = ({ experiment }) => {
 
   const navigate = useNavigate();
-  const pathName = experiment.title.toLowerCase().replace(' ', '-');
+  const pathName = experiment.title.toLowerCase().replaceAll(' ', '-');
 
   const onClick = () => {
     navigate(`/${pathName}`);

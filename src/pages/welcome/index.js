@@ -7,7 +7,6 @@ const WelcomePage = () => {
   const navigate = useNavigate();
   
   const onClick = () => {
-    console.log('Button clicked!')
     navigate('/experiments');
   };
 
