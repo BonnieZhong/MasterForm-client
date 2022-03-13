@@ -36,7 +36,6 @@ const App = (props) => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/thank-you" element={<ThankYouPage />}></Route>
         <Route path="/" element={<WelcomePage />}></Route>
         <Route path="/experiments" element={<ExperimentsPage allExperiments={allExperiments} />}></Route>
         <Route path="/add-experiment" element={<AddExperimentPage />}></Route>

@@ -9,6 +9,7 @@ const HeaderComponent = ({ showBg }) => {
       <div className="nav-container">
         <h1 className="logo-text">Doorsteps</h1>
         <div className="nav-box">
+          <Link to="/" className="nav-text">Home</Link>
           <Link to="/experiments" className="nav-text">Experiments</Link>
           <Link to="/add-experiment" className="nav-text">Add Experiments</Link>
           <Link to="/admin" className="nav-text">Manage</Link>
