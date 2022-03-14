@@ -18,7 +18,7 @@ In the API project directory, you can run:
 #### `npm start`
 
 Runs the json server.
-___
+
 ## Client Side
 ### Installation
 In the MasterForm project directory, you can run:
@@ -35,7 +35,6 @@ In the MasterForm project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-___
 ## API
 
 The APIs used in the app:
@@ -50,7 +49,6 @@ The APIs used in the app:
 
 * POST form data: http://localhost:3001/forms
 
-___
 ## Play around with the MasterForm App
 
 ### Home Page: 
@@ -80,7 +78,7 @@ This is a page that allows you to create an experiment form. There are two types
 http://localhost:3000/admin
 2. Description:\
 A page that lists all your experiments in a table. You can change the form status by clicking the switch button to set your form Available or Not Available.
-___
+
 ## Assumptions
-* This app `does not perform any validation` on user input.
+* This app **does not perform any validation** on user input.
 * This app does not have a responsive UI.
