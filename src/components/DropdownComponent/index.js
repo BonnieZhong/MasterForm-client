@@ -21,7 +21,7 @@ const DropdownComponent = ({ question, options, setResponse, addQuestion = true 
       alignItems="flex-start"
       className="text-field-container"
     >
-      <p className="label-text">{question}</p>
+      <p className="select-text">{question}</p>
       <FormControl fullWidth>
         <Select 
           id="singleSelect"

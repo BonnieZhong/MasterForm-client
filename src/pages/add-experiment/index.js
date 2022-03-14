@@ -44,10 +44,14 @@ const AddExperimentPage = ({ setRefetchData }) => {
   const handleAddQuestion = (event) => {
     if(questionType === 'textfield') {
       setNewComponents([...newComponents, addTextField()]);
-    }else{
+      setCount(count + 1);
+    }else if (questionType === 'select') {
       setNewComponents([...newComponents, addSelectField()]);
+      setCount(count + 1);
+    } else {
+      alert("Please select a question type");
     }
-    setCount(count + 1);
+    // setCount(count + 1);
   };
 
   // Handle an existing question update or add a new question
