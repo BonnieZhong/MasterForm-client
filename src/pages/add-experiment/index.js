@@ -28,7 +28,7 @@ const AddExperimentPage = ({ setRefetchData }) => {
         <TextFieldComponent 
           key={count}
           index={count}
-          question='Please enter your question:' 
+          question={`${count+1}. Please enter your question:` }
           multiline
           setResponse={setChangedQuestion}
           addQuestion={false}
@@ -89,7 +89,7 @@ const AddExperimentPage = ({ setRefetchData }) => {
         title: value,
         questionIds: experiment
       }
-      const res = await forms.post('/experiment', experimentData);
+      const res = await forms.post('/experiments', experimentData);
       // console.log(res.data);
       setRefetchData(true);
       navigate('/experiments');

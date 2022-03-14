@@ -37,7 +37,7 @@ const FormComponent = ({ experimentId, experimentTitle }) => {
     };
     // Get a set of question ID for current experiment form
     const getForms = async () => {
-      const response = await forms.get(`/experiment/?id=${experimentId}`);
+      const response = await forms.get(`/experiments/?id=${experimentId}`);
       setDisabled(response.data[0].disabled);
       const questionSet = response.data[0].questionIds;
       getQuestions(questionSet);

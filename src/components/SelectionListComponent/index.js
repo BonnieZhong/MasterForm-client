@@ -25,7 +25,7 @@ const SelectionListQuestion = ({ index, setQuestion }) => {
 
   return (
     <div>
-      <p className="select-text">Please enter your question:</p>
+      <p className="select-text">{`${index+1}. Please enter your question:`}</p>
       <TextField variant="outlined" value={questionText} onChange={(e) => setQuestionText(e.target.value)} fullWidth/>
       <p className="select-text">Please give options to your question:</p>
       <div className="div-option-text">

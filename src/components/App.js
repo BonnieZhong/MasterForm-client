@@ -15,7 +15,7 @@ const App = (props) => {
   // Get all experiment data
   useEffect(() => {
     const getAllExperiments = async () => {
-      const { data } = await forms.get('/experiment');
+      const { data } = await forms.get('/experiments');
       setAllExperiments(data);
     }
     if (allExperiments.length === 0 || refetchData) {

@@ -13,7 +13,7 @@ const ExperimentRow = ({ experiment, setRefetchData }) => {
   // Update the experiment status in DB and UI
   const onChange = (event) => {
     setChecked(event.target.checked);
-    forms.patch(`/experiment/${experiment.id}`, {
+    forms.patch(`/experiments/${experiment.id}`, {
       disabled : checked
     });
     setRefetchData(true);

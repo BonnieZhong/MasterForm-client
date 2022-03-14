@@ -1,70 +1,80 @@
-# Getting Started with Create React App
+# MasterForm App Introduction
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The MasterForm App aims to streamline the business process of creating forms for different experiments. With MasterForm App, a user can explore existing experiment forms, creating new forms, and changing the status of a form.
 
-## Available Scripts
+## Installation
 
-In the project directory, you can run:
+In the MasterForm project directory, you can run:
 
+### `npm install`
+
+Runs this command to install all required modules that listed as dependencies in package.json.
+
+In the API project directory, you can run:
+### `npm install -g json-server`
+
+Runs this command to install a fake REST API.\
+The data used by MasterForm will be stored in this json server.\
+For more information of this package, please go to this link: https://github.com/typicode/json-server#getting-started\
+
+## Run MasterForm
 ### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
-You may also see any lint errors in the console.
+You may also see some warnings on console about the route was not found. It is because of the app requests data asynchronously.
 
-### `npm test`
+## Run json server
+### `npm start`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Runs the json server.
 
-### `npm run build`
+The APIs used in the app:
+* GET all experiments: http://localhost:3001/experiments
+* GET an experiment: http://localhost:3001/experiments/1
+* POST an experiment: http://localhost:3001/experiments
+* PATCH an experiment: 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* GET all questions: http://localhost:3001/questions
+* GET a question: http://localhost:3001/questions/1
+* POST questions: http://localhost:3001/questions
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* POST form data: http://localhost:3001/forms
 
-### `npm run eject`
+## Play around with the MasterForm App
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Home page: 
+1. Route:\
+http://localhost:3000
+2. Description: A welcome page 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Experiments Page: 
+1. Route:\
+http://localhost:3000/experiments
+2. Description:
+* A page shows a list of experiment forms. You can view each experiment form by clicking "LEARN MORE" button.
+* You can give your responses to each experiment form if it is available, and then you can submit it.
+* A warning message will show on the page if the experiment form is unavailable.
+### Add Experiments Page: 
+1. Route:\
+http://localhost:3000/add-experiment\
+2. Description:\
+A page that allows you to create an experiment forms. There are two types of questions you can add: single line question and selection question.
+3. Instruction:
+* Selects a question type and adds this question field by clicking the "Add Question" button.
+* For selection question, you can give a list of options by clicking the "Add" button.\
+* Submits your experiment form by clicking the "Submit" button.
+* Views your new experiment form on Experiments page.
+### Admin Page: 
+1. Route:\
+http://localhost:3000/admin\
+2. Description:\
+A page that lists all your experiments in a table. You can change the form status by clicking the switch button to set your form is Available or Not Available.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Assumptions
+* This app `does not perform any validation` on user input. It supposes all the input fields are being given correct responses.
+* This app does not have a responsive UI.
